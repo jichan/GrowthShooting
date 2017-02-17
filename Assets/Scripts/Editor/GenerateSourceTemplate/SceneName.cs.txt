@@ -1,0 +1,6 @@
+﻿/// <summary>
+/// このプロジェクトのシーンリスト
+/// </summary>
+public static class SceneName {
+#SCENES#
+}

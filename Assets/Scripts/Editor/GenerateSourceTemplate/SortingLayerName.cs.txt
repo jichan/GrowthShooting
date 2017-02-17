@@ -1,0 +1,6 @@
+﻿/// <summary>
+/// プロジェクトに登録されているソーティングレイヤーリスト
+/// </summary>
+public enum SortingLayerName {
+#SORTINGLAYERS#
+}

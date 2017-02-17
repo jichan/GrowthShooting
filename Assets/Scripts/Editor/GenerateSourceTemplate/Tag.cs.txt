@@ -1,0 +1,6 @@
+﻿/// <summary>
+/// プロジェクトに設定されているタグリスト
+/// </summary>
+public static class Tag {
+#TAGS#
+}

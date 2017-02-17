@@ -1,0 +1,6 @@
+﻿/// <summary>
+/// プロジェクトに登録されているレイヤーリスト
+/// </summary>
+public class Layer {
+#LAYERS#
+}
