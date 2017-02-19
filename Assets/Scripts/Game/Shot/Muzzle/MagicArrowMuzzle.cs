@@ -17,7 +17,7 @@ public class MagicArrowMuzzle : MuzzleBase
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetButton("MagicArrow"))
+		if (Input.GetButtonDown("MagicArrow"))
 		{
 			GameObject enemy = GameObject.Find("Enemy");
 

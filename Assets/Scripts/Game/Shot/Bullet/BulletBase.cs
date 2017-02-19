@@ -14,7 +14,7 @@ public abstract class BulletBase : MonoBehaviour {
 	int power;
 	// 弾の速度
 	[SerializeField]
-	float speed;
+	protected float speed;
 
 	// 方向
 	protected Vector3 direction;
@@ -39,6 +39,15 @@ public abstract class BulletBase : MonoBehaviour {
 	/// 移動
 	/// </summary>
 	protected abstract void SetMoveDirection();
+
+	/// <summary>
+	/// 弾を即時削除してよいかどうか
+	/// </summary>
+	/// <returns></returns>
+	protected virtual bool IsForgiveDestroy()
+	{
+		return true;
+	}
 
 	/// <summary>
 	/// 座標の更新
@@ -66,6 +75,10 @@ public abstract class BulletBase : MonoBehaviour {
 			return;
 		}
 		enemyBase.Damage(power);
-		Destroy(gameObject);
+
+		if (IsForgiveDestroy())
+		{
+			Destroy(gameObject);
+		}
 	}
 }
