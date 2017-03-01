@@ -46,7 +46,7 @@ public class MagicArrowBullet : BulletBase {
 		// 進行方向のほうへ向かせる
 		transform.LookAt(transform.position + direction, transform.up);
 		// カプセルプリミティブの頭を進行方向へ向けるように修正
-		transform.rotation *= Quaternion.AngleAxis(90.0f, Vector3.right);
+		//transform.rotation *= Quaternion.AngleAxis(90.0f, Vector3.up);
 	}
 
 	IEnumerator MoveCoroutine()
