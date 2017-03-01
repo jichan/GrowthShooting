@@ -30,6 +30,7 @@ public class MagicArrowBullet : BulletBase {
 	{
 		birthTime = 0.0f;
 		initSpeed = speed;
+		// 下180度のランダムな方向に飛ばす
 		float initAngle = UnityEngine.Random.Range(angleRange * -0.5f, angleRange * 0.5f);
 		float initRadian = initAngle * Mathf.Deg2Rad;
 		direction = new Vector3(-Mathf.Sin(initRadian), 0, -Mathf.Cos(initRadian));
@@ -54,6 +55,10 @@ public class MagicArrowBullet : BulletBase {
 
 		while (true)
 		{
+			if(target == null)
+			{
+				yield break;
+			}
 			// 弾からターゲットへの方向ベクトルを算出
 			Vector3 targetDir = (target.position - transform.position);
 			targetDir.Normalize();
@@ -83,6 +88,8 @@ public class MagicArrowBullet : BulletBase {
 		}
 		// パーティクルを停止させる
 		particle.Stop();
+
+		StopCoroutine("MoveCoroutine");
 
 		return false;
 	}

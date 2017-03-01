@@ -21,26 +21,31 @@ public abstract class MuzzleBase : MonoBehaviour, IMuzzle {
 	float shotLastTime;
 
 	/// <summary>
-	/// 弾を発射できる状態であれば発射する
-	/// </summary>
-	public void Shot(Transform target = null)
-	{
-		if (shotLastTime + shotIntervalSecond < Time.time)
-		{
-			shotLastTime = Time.time;
-			CreateBullet(target);
-		}
-	}
-
-	/// <summary>
 	/// 弾を生成する
 	/// </summary>
-	void CreateBullet(Transform target)
+	public void CreateBullet(Transform target = null)
 	{
 		GameObject bulletObj = Instantiate(bulletPrefab.gameObject);
 		BulletBase bulletBase = bulletObj.GetComponent<BulletBase>();
 		bulletBase.transform.position = transform.position;
 		bulletBase.Initialize(target, transform.forward);
+	}
+
+	/// <summary>
+	/// 発射時間を更新する
+	/// </summary>
+	protected void UpdateTimeStamp()
+	{
+		shotLastTime = Time.time;
+	}
+
+	/// <summary>
+	/// 前回の発射から充分に時間が経っているかどうかチェックする
+	/// </summary>
+	/// <returns></returns>
+	protected bool CheckReadyToShot()
+	{
+		return shotLastTime + shotIntervalSecond < Time.time;
 	}
 
 	/// <summary>

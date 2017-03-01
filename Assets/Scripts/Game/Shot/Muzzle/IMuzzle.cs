@@ -10,5 +10,5 @@ public interface IMuzzle {
 	/// <summary>
 	/// 弾を発射する
 	/// </summary>
-	void Shot(Transform target = null);
+	void CreateBullet(Transform target = null);
 }

@@ -7,6 +7,12 @@ using UnityEngine;
 /// </summary>
 public class MagicArrowMuzzle : MuzzleBase
 {
+	[SerializeField]
+	int maxTarget;
+	public int MaxTarget {
+		get { return maxTarget; }
+		set { maxTarget = value; }
+	}
 
 	// Use this for initialization
 	void Start()
@@ -19,9 +25,17 @@ public class MagicArrowMuzzle : MuzzleBase
 	{
 		if (Input.GetButtonDown("MagicArrow"))
 		{
-			GameObject enemy = GameObject.Find("Enemy");
+			var enemyList = EnemyManager.Instance.GetNearEnemies(transform.position, maxTarget);
 
-			Shot(enemy.transform);
+			for (int i = 0; i < MaxTarget; i++)
+			{
+				if (i >= enemyList.Count)
+				{
+					CreateBullet(null);
+				} else {
+					CreateBullet(enemyList.Values[i].transform);
+				}
+			}
 		}
 	}
 }
