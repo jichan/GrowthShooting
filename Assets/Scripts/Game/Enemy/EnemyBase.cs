@@ -11,23 +11,29 @@ public abstract class EnemyBase : MonoBehaviour {
 	int maxHP;
 	
 	// 残りHP
-	[SerializeField]
 	int hp;
+
+	// 敵の種類
+	public EnemyKind Kind { get; set; }
+
+	// 出現してからの時間
+	protected float timeAfterSpawn;
 
 	public void Awake()
 	{
 		hp = maxHP;
+		timeAfterSpawn = 0.0f;
 		InitializeInternal();
 	}
 
 	// Use this for initialization
 	void Start () {
-		
+		StartCoroutine(Move());
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		timeAfterSpawn += Time.deltaTime;
 	}
 
 	/// <summary>
@@ -41,6 +47,7 @@ public abstract class EnemyBase : MonoBehaviour {
 		if(hp < 0)
 		{
 			OnDied();
+			EnemyManager.Instance.RemoveEnemy(Kind, this);
 			Destroy(gameObject);
 		}
 	}
@@ -53,7 +60,7 @@ public abstract class EnemyBase : MonoBehaviour {
 	/// <summary>
 	/// 移動を行う
 	/// </summary>
-	protected abstract void Move();
+	protected abstract IEnumerator Move();
 
 	/// <summary>
 	/// 死んだ時に呼ばれる
